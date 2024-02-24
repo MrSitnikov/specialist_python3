@@ -36,7 +36,9 @@ def out_item(request, id):
             text = f"""<i>Товар</i> <b>{item['name']}</b>
             <br>
             <i>Колличество товара</i>
-            <b>{item['quantity']}</b>"""
+            <b>{item['quantity']}</b><br>
+            <a href="/items"><i>назад к списку товаров</i></a>
+            """
             break
         text = f'<b>Товар с id={id} не найден</b>'
     return HttpResponse(text)
