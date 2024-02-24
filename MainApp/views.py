@@ -22,11 +22,11 @@ def home(request):
 def about(request):
     text = """
         Имя: <b>Иван</b><br>
-Отчество: <b>Петрович</b><br>
-Фамилия: <b>Иванов</b><br>
-телефон: <b>8-923-600-01-02</b><br>
-email: <b>vasya@mail.ru</b>
-"""
+        Отчество: <b>Петрович</b><br>
+        Фамилия: <b>Иванов</b><br>
+        телефон: <b>8-923-600-01-02</b><br>
+        email: <b>vasya@mail.ru</b>
+        """
     return HttpResponse(text)
 
 
@@ -45,6 +45,7 @@ def out_item(request, id):
 def out_all_items(request):
     out = []
     for item in items:
-        """<a href="URL">id</a>"""
-        out.append(f'<b>id:</b> {item['id']} <b>товар:</b>{item['name']} <b>кол-во:</b> {item['quantity']}<br>') 
+        out.append(f"""<b>id:</b> <a href="/item/{item['id']}">{item['id']}</a>
+                   <b>товар:</b> {item['name']} 
+                   <b>кол-во:</b> {item['quantity']}<br>""")
     return HttpResponse(out)
