@@ -43,4 +43,8 @@ def out_item(request, id):
 
 
 def out_all_items(request):
-    pass
+    out = []
+    for item in items:
+        """<a href="URL">id</a>"""
+        out.append(f'<b>id:</b> {item['id']} <b>товар:</b>{item['name']} <b>кол-во:</b> {item['quantity']}<br>') 
+    return HttpResponse(out)
