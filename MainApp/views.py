@@ -37,7 +37,7 @@ def out_item(request, id):
             <br>
             <i>Колличество товара</i>
             <b>{item['quantity']}</b><br>
-            <a href="/items"><i>назад к списку товаров</i></a>
+            <a href="/items"><i>Назад к списку товаров</i></a>
             """
             break
         text = f'<b>Товар с id={id} не найден</b>'
@@ -50,4 +50,4 @@ def out_all_items(request):
         out.append(f"""<b>id:</b> <a href="/item/{item['id']}">{item['id']}</a>
                    <b>товар:</b> {item['name']} 
                    <b>кол-во:</b> {item['quantity']}<br>""")
-    return HttpResponse(out)
+    return HttpResponse("\n".join(out))
