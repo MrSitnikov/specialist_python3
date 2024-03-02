@@ -36,6 +36,7 @@ def about(request):
 def out_item(request, item_id):
     for item in items:
         if item['id'] == item_id:
+            print(item)
             return render(request, 'item.html', item)
     return render(request, 'item.html', {"item": False, 'id': item_id})
     #     if item['id'] == id:
@@ -51,9 +52,10 @@ def out_item(request, item_id):
 
 
 def out_all_items(request):
-    out = []
-    for item in items:
-        out.append(f"""<b>id:</b> <a href="/item/{item['id']}">{item['id']}</a>
-                   <b>товар:</b> {item['name']}
-                   <b>кол-во:</b> {item['quantity']}<br>""")
-    return HttpResponse("\n".join(out))
+    # out = []
+    # for item in items:
+    #     out.append(f"""<b>id:</b> <a href="/item/{item['id']}">{item['id']}</a>
+    #                <b>товар:</b> {item['name']}
+    #                <b>кол-во:</b> {item['quantity']}<br>""")
+    # return HttpResponse("\n".join(out))
+    return render(request, 'items.html', {'items_dic':items})
