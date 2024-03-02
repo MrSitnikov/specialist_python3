@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {% if item != False %}
+        <i>Товар</i> <b>{{ name }}</b><br>
+        <i>Колличество товара: {{ quantity }}</i><br>
+        <a href="/items"><i>Назад к списку товаров</i></a>
+    {% else %}
+        <b>Товар с id={{ id }} не найден</b>
+    {% endif %}
+</body>
+
+</html>

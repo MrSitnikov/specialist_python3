@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ol>
+    {% for el in items_dic %}
+        <li>
+            <b>id:</b> <a href="/item/{{ el.id }}">{{ el.id }}</a>
+            <b>товар:</b> {{el.name}}
+            <b>кол-во:</b> {{el.quantity}}<br>
+        </li>
+    {% endfor %}
+    </ol>
+</body>
+</html>
