@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse,HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound
 from django.urls import reverse
 # Create your views here.
 
@@ -13,10 +13,13 @@ items = [
 
 
 def home(request):
-    text = """
-        <h1>"Изучаем django"</h1>
-    <strong>Автор</strong>: <i>Иванов И.П.</i>"""
-    return HttpResponse(text)
+    # text = """
+    #     <h1>"Изучаем django"</h1>
+    # <strong>Автор</strong>: <i>Иванов И.П.</i>"""
+    # return HttpResponse(text)
+    data_name = {'name': 'Петров Иван Иваныч',
+                 'email': 'may_mail@ya.ru'}
+    return render(request, 'index.html',data_name)
 
 
 def about(request):
@@ -30,24 +33,27 @@ def about(request):
     return HttpResponse(text)
 
 
-def out_item(request, id):
+def out_item(request, item_id):
     for item in items:
-        if item['id'] == id:
-            text = f"""<i>Товар</i> <b>{item['name']}</b>
-            <br>
-            <i>Колличество товара</i>
-            <b>{item['quantity']}</b><br>
-            <a href="/items"><i>Назад к списку товаров</i></a>
-            """
-            return HttpResponse(text)
-        text = f'<b>Товар с id={id} не найден</b>'
-        return HttpResponseNotFound(text)
+        if item['id'] == item_id:
+            return render(request, 'item.html', item)
+    return render(request, 'item.html', {"item": False, 'id': item_id})
+    #     if item['id'] == id:
+    #         text = f"""<i>Товар</i> <b>{item['name']}</b>
+    #         <br>
+    #         <i>Колличество товара</i>
+    #         <b>{item['quantity']}</b><br>
+    #         <a href="/items"><i>Назад к списку товаров</i></a>
+    #         """
+    #         return HttpResponse(text)
+    #     text = f'<b>Товар с id={id} не найден</b>'
+    #     return HttpResponseNotFound(text)
 
 
 def out_all_items(request):
     out = []
     for item in items:
         out.append(f"""<b>id:</b> <a href="/item/{item['id']}">{item['id']}</a>
-                   <b>товар:</b> {item['name']} 
+                   <b>товар:</b> {item['name']}
                    <b>кол-во:</b> {item['quantity']}<br>""")
     return HttpResponse("\n".join(out))
