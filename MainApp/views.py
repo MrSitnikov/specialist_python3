@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse,HttpResponseNotFound
 from django.urls import reverse
 # Create your views here.
 
@@ -39,9 +39,9 @@ def out_item(request, id):
             <b>{item['quantity']}</b><br>
             <a href="/items"><i>Назад к списку товаров</i></a>
             """
-            break
+            return HttpResponse(text)
         text = f'<b>Товар с id={id} не найден</b>'
-    return HttpResponse(text)
+        return HttpResponseNotFound(text)
 
 
 def out_all_items(request):
