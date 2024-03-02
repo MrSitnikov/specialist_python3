@@ -17,7 +17,7 @@ def home(request):
     #     <h1>"Изучаем django"</h1>
     # <strong>Автор</strong>: <i>Иванов И.П.</i>"""
     # return HttpResponse(text)
-    data_name = {'name': 'Петров Иван Иваныч',
+    data_name = {'name': 'Иван Петров Иваныч',
                  'email': 'may_mail@ya.ru'}
     return render(request, 'index.html',data_name)
 
@@ -36,9 +36,8 @@ def about(request):
 def out_item(request, item_id):
     for item in items:
         if item['id'] == item_id:
-            print(item)
             return render(request, 'item.html', item)
-    return render(request, 'item.html', {"item": False, 'id': item_id})
+    return HttpResponseNotFound(f'<b>Товар с id={item_id} не найден</b>')
     #     if item['id'] == id:
     #         text = f"""<i>Товар</i> <b>{item['name']}</b>
     #         <br>

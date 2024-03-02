@@ -10,8 +10,12 @@
 <body>
     {% if item != False %}
         <i>Товар</i> <b>{{ name }}</b><br>
-        <i>Колличество товара: {{ quantity }}</i><br>
-        <a href="/items"><i>Назад к списку товаров</i></a>
+        {% if quantity != 0 %}
+            <i>Колличество товара: {{ quantity }}</i><br>
+            <a href="/items"><i>Назад к списку товаров</i></a>
+        {% else %}
+            <p><b>Товара нет в наличии!<b></p>
+        {% endif %}
     {% else %}
         <b>Товар с id={{ id }} не найден</b>
     {% endif %}
