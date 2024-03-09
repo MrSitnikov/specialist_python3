@@ -1,53 +1,14 @@
-<!DOCTYPE html>
-<html lang="ru">
-  <head>
-    <meta charset="utf-8" />
-    <title>Сайт проекта</title>
-    <style>
-      h1 {
-        color: black;
-        font-family: impact;
-      }
-      h2 {
-        font-family: arial;
-      }
-      /* Стиль списка */
-      ul.breadcrumb {
-        padding: 16px;
-      }
-      /* Добавить символ (/) */
-      ul.breadcrumb li:before{
-        color: black;
-        content: "/";
-      }
-      /* Отображение элементов списка в линию */
-      ul.breadcrumb li {
-        display: inline;
-        font-size: 18px;
-      }
-      /* Добавить цвет на наведении курсора мыши */
-      ul.breadcrumb li a:hover {
-        color: #01447e;
-        text-decoration: underline;
-      }
-    </style>
-  </head>
-  <body>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+{% endblock %}%}
+
+{% block content %}
+    <p>Это главная страница сайта.</p>
+    {% include "include_head.html" %}
+    
     <h1>"Приветствую!"</h1>
     Меня зовут: {{ name }}<br />
     Мой емайл: {{ email }}
-    <p>Это главная страница сайта.</p>
-    <ul class="breadcrumb">
-      <li>
-        <a href="/" >Home</a>
-      </li>
-      <li>
-        <a href="/items" >Items</a>
-      </li>
-      <li>
-        <a href="/about" >About</a>
-      </li>
-    </ul>
-    <i>Сайт пока в разработке...</i>
-  </body>
-</html>
+{% endblock %}

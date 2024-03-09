@@ -32,7 +32,7 @@ def about(request):
     return HttpResponse(text)
 
 
-def out_item(request, item_id):
+def get_item(request, item_id):
     #get_data = Item.objects.get(pk=item_id) # MainApp.models.Item.DoesNotExist
     get_id  = Item.objects.filter(id=item_id) #list
     if not get_id:

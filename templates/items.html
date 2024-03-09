@@ -1,66 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Items</title>
-    <style type="text/css">
-      .main {
-        width: 100%;
-        margin: 30px;
-        overflow: auto;
-      }
-      .tovar {
-        width: 17%;
-        height: 250px;
-        border: 1px solid;
-        margin: 20px;
-        float: left;
-      }
-      .tovar p {
-        color: blue;
-        padding: 10px;
-        text-align: center
-      }
-            /* Стиль списка */
-      ul.breadcrumb {
-        padding: 16px;
-      }
-      /* Добавить символ (/) */
-      ul.breadcrumb li:before {
-        color: black;
-        content: '/ ';
-      }
-      /* Отображение элементов списка в линию */
-      ul.breadcrumb li {
-        display: inline;
-        font-size: 18px;
-      }
-      /* Добавить цвет на наведении курсора мыши */
-      ul.breadcrumb li a:hover {
-        color: #01447e;
-        text-decoration: underline;
-      }
-    </style>
-  </head>
-  <body>
-    <ul class="breadcrumb">
-      <li>
-        <a href="/" >Home</a>
-      </li>
-      <li>
-        <a href="/items" >Items</a>
-      </li>
-      <li>
-        <a href="/about" >About</a>
-      </li>
-      <li>Товары</li>
+{% extends 'base.html' %}
+
+{% block style %}
+{% endblock style %}
+
+{% block content %}
+    {% include "include_head.html" %}
+    <li>Товары</li>
     <div class="main">
       <h2>Товары</h2>
       {% for el in items_dic %}
         <div class="tovar">
           <p>
-            <b>id товара:</b> <a href="/item/{{ el.id }}">{{ el.id }}</a><br>
+            <b>id товара:</b> <a href="{% url 'item_detail' el.id %} ">{{ el.id }}</a><br>
             <b>товар:</b> {{ el.name }}<br>
             <b>бренд:</b> {{ el.brand }}<br>
             <b>кол-во:</b> {{ el.count }}<br>
@@ -68,6 +19,4 @@
           </p>
         </div>
       {% endfor %}
-    </div>
-  </body>
-</html>
+{% endblock  %}
