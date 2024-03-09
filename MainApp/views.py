@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound
 from django.urls import reverse
+from MainApp.models import Item
 # Create your views here.
 
 items = [
@@ -10,6 +11,7 @@ items = [
     {"id": 7, "name": "Картофель фри", "quantity": 0},
     {"id": 8, "name": "Кепка", "quantity": 124},
 ]
+items = Item.objects.all()
 
 
 def home(request):
@@ -20,6 +22,7 @@ def home(request):
     data_name = {'name': 'Иван Петров Иваныч',
                  'email': 'may_mail@ya.ru'}
     return render(request, 'index.html',data_name)
+
 
 
 def about(request):
@@ -34,10 +37,18 @@ def about(request):
 
 
 def out_item(request, item_id):
-    for item in items:
-        if item['id'] == item_id:
-            return render(request, 'item.html', item)
-    return HttpResponseNotFound(f'<b>Товар с id={item_id} не найден</b>')
+    #get_data = Item.objects.get(pk=item_id) # MainApp.models.Item.DoesNotExist
+    get_id  = Item.objects.filter(id=item_id) #list
+    if not get_id:
+        context = {'item_id': item_id}
+        return render(request, 'item.html', context)
+    context = {'item': get_id}
+    return render(request, 'item.html', context)
+    #for item in items:
+    # if get_data.id == item_id:
+    #     print(get_data.name)
+    #return render(request, 'item.html', {'data_dic': get_data})
+    #return HttpResponseNotFound(f'<b>Товар с id={item_id} не найден</b>')
     #     if item['id'] == id:
     #         text = f"""<i>Товар</i> <b>{item['name']}</b>
     #         <br>
@@ -56,5 +67,6 @@ def out_all_items(request):
     #     out.append(f"""<b>id:</b> <a href="/item/{item['id']}">{item['id']}</a>
     #                <b>товар:</b> {item['name']}
     #                <b>кол-во:</b> {item['quantity']}<br>""")
-    # return HttpResponse("\n".join(out))
+    # return HttpResponse("\n".join(out))    
+    items = Item.objects.all()
     return render(request, 'items.html', {'items_dic':items})

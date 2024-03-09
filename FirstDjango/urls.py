@@ -20,5 +20,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('MainApp.urls')),
+    path('', include('MainApp.urls')), # добалвяем ссылку на наш проект в котором имеется свой файл urls.py
+                                       # если приложение будет одно, то можно добавлять в общий проект
 ]

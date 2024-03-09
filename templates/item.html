@@ -1,24 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    {% if item != False %}
-        <i>Товар</i> <b>{{ name }}</b><br>
-        {% if quantity != 0 %}
-            <i>Колличество товара: {{ quantity }}</i><br>
-            <a href="/items"><i>Назад к списку товаров</i></a>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Item</title>
+    <style>
+      /* Стиль списка */
+      ul.breadcrumb {
+        padding: 16px;
+      }
+      /* Добавить символ (/) */
+      ul.breadcrumb li:before {
+        color: black;
+        content: '/ ';
+      }
+      /* Отображение элементов списка в линию */
+      ul.breadcrumb li {
+        display: inline;
+        font-size: 18px;
+      }
+      /* Добавить цвет на наведении курсора мыши */
+      ul.breadcrumb li a:hover {
+        color: #01447e;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <ul class="breadcrumb">
+      <li>
+        <a href="/" >Home</a>
+      </li>
+      <li>
+        <a href="/items" >Items</a>
+      </li>
+      <li>
+        <a href="/about" >About</a>
+      </li>
+      {% for data in item %}
+        <li> {{ data.name }} </li>
+      {% endfor %}
+    </ul>
+    {% if item %}
+      {% for data in item %}
+        {% if data.count == 0 %}
+          <i>Товара нет на складе</i><br />
         {% else %}
-            <p><b>Товара нет в наличии!<b></p>
+          <i>Товар:</i> {{ data.name }} <br />
+          <i>Брэнд:</i> {{ data.brand }}<br />
+          <i>Количество товара на складе:</i> {{ data.count }}<br />
         {% endif %}
+      {% endfor %}
     {% else %}
-        <b>Товар с id={{ id }} не найден</b>
+      <b>Товар с id:{{ item_id }} не найден</b><br />
     {% endif %}
-</body>
-
+    <a href="/items"><i>Назад к списку товаров</i></a>
+  </body>
 </html>
